@@ -1,0 +1,45 @@
+﻿@model BookReservationSystem.ViewModels.Books.BooksViewModel
+
+<h1>Available book list</h1>
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="row">
+            <div class="col-sm-10">
+                <p>Number of available books: @Model.BooksAvailable</p>
+            </div>
+            <div class="col-sm-2">
+                @Html.ActionLink("Add book", "Add", "Book", new { @class = "btn btn-success pull-right" })
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>   
+                    <th>Pages</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Books) {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.Author</td>
+                        <td>@book.Category</td>
+                        <td>@book.PagesNo</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                @Html.ActionLink("Remove", "Delete", "Book", new { Id = book.Id }, new { @class = "btn btn-danger" })
+                                @Html.ActionLink("Order", "Order", "Order", new { Id = book.Id }, new { @class = "btn btn-primary" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
